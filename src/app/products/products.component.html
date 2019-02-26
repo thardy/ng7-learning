@@ -1,0 +1,18 @@
+<p>
+  products works!
+</p>
+modalClass={{modalClass}}<br/>
+Choose pretend device:
+<button type="button" (click)="setDesktop()">Desktop</button>
+<button type="button" (click)="setMobile()">Mobile</button>
+<br/>
+<button type="button" (click)="doIt()">Open Modal</button>
+
+
+<ngx-smart-modal #myModal identifier="videoModal" [customClass]="modalClass">
+  <h1>Hello!</h1>
+
+  I am a modal!!!
+
+  <button class="button -dark" (click)="myModal.close()">Close</button>
+</ngx-smart-modal>
