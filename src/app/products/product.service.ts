@@ -4,7 +4,9 @@ import * as _ from 'lodash';
 import {Product} from './product.model';
 import {delay} from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProductService {
   private itemsSubject = new BehaviorSubject([]);
   // not a fan of this, just mimicking tutorial, FOR NOW
@@ -28,9 +30,15 @@ export class ProductService {
     this.publish(items);
   }
 
+  getById(id: number) {
+    const foundItem = this.itemsSubject.value.find((item) => item.id === id);
+    return _.cloneDeep(foundItem);
+  }
+
   delete(deletedItem: Product) {
     // pretty sure this is jacked because he doesn't persist the deletion to the BehaviorSubject
     //  won't the next component to subscribe get the list WITH the deleted item in it?
+    // todo: prove or disprove the above assumption
     const items = this.cloneItems();
     _.remove(items, item => item.id === deletedItem.id);
 
